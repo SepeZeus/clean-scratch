@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CleanArchitectureExample.Application.Dtos;
 using CleanArchitectureExample.Application.Interfaces;
 using CleanArchitectureExample.Domain.Entities;
 using CleanArchitectureExample.WebAPI.Controllers;
@@ -62,8 +62,8 @@ namespace TestProject.Presentation
             // Arrange
             var mockRegistrationService = new Mock<IUserRegistrationService>();
             var mockFetchService = new Mock<IUserFetchService>();
-            var user = new User { Id = Guid.NewGuid(), Name = "valid", Email = "valid@valid.com" };
-            mockFetchService.Setup(service => service.FetchUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+            var userDto = new UserDto { Id = Guid.NewGuid(), Name = "valid", Email = "valid@valid.com" };
+            mockFetchService.Setup(service => service.FetchUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(userDto);
 
             var controller = new UsersController(mockRegistrationService.Object, mockFetchService.Object);
 
@@ -83,8 +83,8 @@ namespace TestProject.Presentation
             // Arrange
             var mockRegistrationService = new Mock<IUserRegistrationService>();
             var mockFetchService = new Mock<IUserFetchService>();
-            User user = null;
-            mockFetchService.Setup(service => service.FetchUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+            UserDto userDto = null;
+            mockFetchService.Setup(service => service.FetchUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(userDto);
 
             var controller = new UsersController(mockRegistrationService.Object, mockFetchService.Object);
 
